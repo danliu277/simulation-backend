@@ -7,7 +7,12 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 doc = Nokogiri::HTML(open("https://pokemon.alexonsager.net/"))
-5.times do
-     
-    puts doc.at_css('[id="pk_img"]').attributes["src"]
+1.times do
+    select1 = doc.at_css('[id="select1"]')
+    # select2 = doc.at_css('[id="select2"]')
+    select1.children.each do |option|
+        puts option.attributes if option.attributes['selected']
+    end
+
+    # puts doc.at_css('[id="pk_img"]').attributes["src"]
 end
