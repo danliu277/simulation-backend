@@ -11,6 +11,12 @@ class UsersController < ApplicationController
             render json: {errors: user.errors.full_messages}
         end
     end
+
+    def login
+        user = User.find_by(username: params[:username])
+
+        render json: {user: user, token: token}
+    end
   
     private def user_params
         params.require(:user).permit(:username, :password)
