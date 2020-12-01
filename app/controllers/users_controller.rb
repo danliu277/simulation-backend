@@ -5,8 +5,7 @@ class UsersController < ApplicationController
             password: params[:password],
         )
         if user.save
-            token = encode_token(user.id)
-            render json: {user: user, token: token}
+            render json: user
         else
             render json: {errors: user.errors.full_messages}
         end
@@ -14,8 +13,11 @@ class UsersController < ApplicationController
 
     def login
         user = User.find_by(username: params[:username])
-        byebug
-        render json: {user: user, token: token}
+        if user
+            render json: user
+        else
+            render json: {errors: user.errors.full_messages}
+        end
     end
   
     private def user_params
