@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
     def login
         user = User.find_by(username: params[:username])
-
+        byebug
         render json: {user: user, token: token}
     end
   
