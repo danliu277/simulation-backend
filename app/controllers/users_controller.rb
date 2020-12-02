@@ -14,7 +14,11 @@ class UsersController < ApplicationController
     def login
         user = User.find_by(username: params[:username])
         if user
-            render json: user
+            if user.authenticate(params[:password])
+                render json: user
+            else
+                render json: {errors: "Username and password does not match"}
+            end
         else
             render json: {errors: user.errors.full_messages}
         end
