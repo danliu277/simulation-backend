@@ -17,7 +17,7 @@ class UsersController < ApplicationController
             if user.authenticate(params[:password])
                 render json: user
             else
-                render json: {errors: "Username and password does not match"}
+                render json: {errors: ["Username and password does not match"}]
             end
         else
             render json: {errors: user.errors.full_messages}
