@@ -1,9 +1,6 @@
 class UsersController < ApplicationController
     def create
-        user = User.new(
-            username: params[:username],
-            password: params[:password],
-        )
+        user = User.new(user_params)
         if user.save
             render json: user
         else
@@ -17,7 +14,7 @@ class UsersController < ApplicationController
             if user.authenticate(params[:password])
                 render json: user
             else
-                render json: {errors: ["Username and password does not match"}]
+                render json: {errors: ["Username and password does not match"]}
             end
         else
             render json: {errors: user.errors.full_messages}
